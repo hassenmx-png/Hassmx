@@ -1,0 +1,12 @@
+services:
+  usine-video:
+    build: .
+    container_name: usine-video
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_USER: hassen
+      APP_PASSWORD: ${APP_PASSWORD:?Définis APP_PASSWORD dans le fichier .env}
+    volumes:
+      - ./data:/data
