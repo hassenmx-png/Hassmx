@@ -3,7 +3,7 @@
 # Usage :  curl -fsSL <url>/install.sh | bash -s MOT_DE_PASSE
 set -e
 PASS="${1:-}"
-if [ -z "$PASS" ]; then echo "❌ Ajoute ton mot de passe à la fin de la commande."; exit 1; fi
+if [ -z "$PASS" ]; then PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 10); fi
 BRANCH_URL="https://codeload.github.com/hassenmx-png/Hassmx/tar.gz/refs/heads/usine-video"
 DIR=/opt/usine-video
 
@@ -23,4 +23,5 @@ IP=$(curl -fsSL https://api.ipify.org || hostname -I | awk '{print $1}')
 echo ""
 echo "✅ C'est prêt !"
 echo "👉 Ouvre : http://$IP:8000"
-echo "   Identifiant : hassen   ·   Mot de passe : celui que tu as choisi"
+echo "   Identifiant : hassen   ·   Mot de passe : $PASS"
+echo "   (note-le ! il est aussi dans /opt/usine-video/.env)"
